@@ -1,0 +1,12 @@
+{
+	"name": "consistence/sentry-symfony",
+	"description": "-",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Vašek Purchart",
+			"email": "me@vasekpurchart.cz",
+			"homepage": "http://vasekpurchart.cz"
+		}
+	]
+}
