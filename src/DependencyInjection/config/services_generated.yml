@@ -12,3 +12,12 @@ services:
             - '@consistence_sentry.consistence.sentry.metadata_source.metadata_source'
             - '@consistence_sentry.consistence.sentry.factory.sentry_factory'
             - '%consistence_sentry.generated.target_dir%'
+
+    consistence_sentry.consistence.sentry.symfony_bundle.generated.generate_sentry_command:
+        class: Consistence\Sentry\SymfonyBundle\Generated\GenerateSentryCommand
+        arguments:
+            - '@consistence_sentry.consistence.sentry.generated.sentry_autoloader'
+            - '%consistence_sentry.generated.target_dir%'
+        tags:
+            -
+                name: console.command
