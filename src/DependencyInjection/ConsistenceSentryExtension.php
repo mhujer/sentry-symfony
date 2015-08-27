@@ -18,6 +18,9 @@ class ConsistenceSentryExtension extends \Symfony\Component\HttpKernel\Dependenc
 	const CONTAINER_PARAMETER_GENERATED_TARGET_DIR = 'consistence_sentry.generated.target_dir';
 	const CONTAINER_PARAMETER_MODE = 'consistence_sentry.mode';
 
+	const CONTAINER_SERVICE_GENERATED_AUTOLOADER = 'consistence_sentry.consistence.sentry.generated.sentry_autoloader';
+	const CONTAINER_SERVICE_RUNTIME_HELPER = 'consistence_sentry.consistence.sentry.runtime.runtime_helper';
+
 	const DEFAULT_GENERATED_CLASS_MAP_TARGET_FILE_NAME = '_classMap.php';
 
 	/**
