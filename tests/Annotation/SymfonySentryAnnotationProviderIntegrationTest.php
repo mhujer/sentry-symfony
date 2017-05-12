@@ -82,6 +82,18 @@ class SymfonySentryAnnotationProviderIntegrationTest extends \PHPUnit\Framework\
 		$this->assertEmpty($annotationProvider->getPropertyAnnotations($property, 'foo'));
 	}
 
+	public function testUnstructuredAnnotation()
+	{
+		$annotationProvider = $this->createAnnotationProvider();
+		$property = new ReflectionProperty(Foo::class, 'noParams');
+
+		$annotation = $annotationProvider->getPropertyAnnotation($property, 'var');
+		$this->assertInstanceOf(Annotation::class, $annotation);
+		$this->assertSame('var', $annotation->getName());
+		$this->assertSame('string', $annotation->getValue());
+		$this->assertEmpty($annotation->getFields());
+	}
+
 	/**
 	 * @return \Consistence\Sentry\SymfonyBundle\Annotation\DoctrineSentryAnnotationProvider
 	 */
@@ -91,7 +103,8 @@ class SymfonySentryAnnotationProviderIntegrationTest extends \PHPUnit\Framework\
 			new AnnotationReader(),
 			[
 				Get::class => 'get',
-			]
+			],
+			new VarAnnotationProvider()
 		);
 	}
 
