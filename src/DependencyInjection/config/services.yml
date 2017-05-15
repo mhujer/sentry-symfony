@@ -1,0 +1,31 @@
+services:
+    consistence_sentry.consistence.annotation.annotation_provider: '@consistence_sentry.consistence.sentry.symfony_bundle.annotation.doctrine_sentry_annotation_provider'
+
+    consistence_sentry.consistence.sentry.factory.sentry_factory: '@consistence_sentry.consistence.sentry.factory.simple.simple_sentry_factory'
+
+    consistence_sentry.consistence.sentry.factory.simple.simple_sentry_factory:
+        class: Consistence\Sentry\Factory\Simple\SimpleSentryFactory
+        arguments:
+            - '@consistence_sentry.consistence.sentry.sentry_identificator_parser.sentry_identificator_parser'
+
+    consistence_sentry.consistence.sentry.metadata_source.annotation.annotation_metadata_source:
+        class: Consistence\Sentry\MetadataSource\Annotation\AnnotationMetadataSource
+        arguments:
+            - '@consistence_sentry.consistence.sentry.factory.sentry_factory'
+            - '@consistence_sentry.consistence.sentry.sentry_identificator_parser.sentry_identificator_parser'
+            - '@consistence_sentry.consistence.annotation.annotation_provider'
+
+    consistence_sentry.consistence.sentry.metadata_source.metadata_source: '@consistence_sentry.consistence.sentry.metadata_source.annotation.annotation_metadata_source'
+
+    consistence_sentry.consistence.sentry.sentry_identificator_parser.sentry_identificator_parser:
+        class: Consistence\Sentry\SentryIdentificatorParser\SentryIdentificatorParser
+
+    consistence_sentry.consistence.sentry.symfony_bundle.annotation.doctrine_sentry_annotation_provider:
+        class: Consistence\Sentry\SymfonyBundle\Annotation\DoctrineSentryAnnotationProvider
+        arguments:
+            - '@annotation_reader'
+            - '%consistence_sentry.annotation.method_annotations_map%'
+            - '@consistence_sentry.consistence.sentry.symfony_bundle.annotation.var_annotation_provider'
+
+    consistence_sentry.consistence.sentry.symfony_bundle.annotation.var_annotation_provider:
+        class: Consistence\Sentry\SymfonyBundle\Annotation\VarAnnotationProvider

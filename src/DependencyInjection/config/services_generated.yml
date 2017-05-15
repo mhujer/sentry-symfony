@@ -1,0 +1,14 @@
+services:
+    consistence_sentry.consistence.sentry.generated.sentry_autoloader:
+        class: Consistence\Sentry\Generated\SentryAutoloader
+        arguments:
+            - '@consistence_sentry.consistence.sentry.generated.sentry_generator'
+            - '%consistence_sentry.generated.class_map_target_file%'
+
+    consistence_sentry.consistence.sentry.generated.sentry_generator:
+        class: Consistence\Sentry\Generated\SentryGenerator
+        arguments:
+            - '@consistence_sentry.consistence.class_finder.class_finder'
+            - '@consistence_sentry.consistence.sentry.metadata_source.metadata_source'
+            - '@consistence_sentry.consistence.sentry.factory.sentry_factory'
+            - '%consistence_sentry.generated.target_dir%'
