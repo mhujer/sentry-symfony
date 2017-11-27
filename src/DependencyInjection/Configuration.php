@@ -43,20 +43,15 @@ class Configuration implements \Symfony\Component\Config\Definition\Configuratio
 
 		$rootNode
 			->children()
-				->arrayNode(self::SECTION_GENERATED)
-					->addDefaultsIfNotSet()
-					->children()
-						->scalarNode(self::PARAMETER_GENERATED_FILES_DIR)
-							->defaultValue($this->normalizePathIfPossible(
-								$this->kernelCacheDir . '/' . self::DEFAULT_GENERATED_FILES_DIR_NAME
-							))
-							->beforeNormalization()
-								->ifString()
-								->then(function (string $dir): string {
-									return $this->normalizePathIfPossible($dir);
-								})
-								->end()
-							->end()
+				->scalarNode(self::PARAMETER_GENERATED_FILES_DIR)
+					->defaultValue($this->normalizePathIfPossible(
+						$this->kernelCacheDir . '/' . self::DEFAULT_GENERATED_FILES_DIR_NAME
+					))
+					->beforeNormalization()
+						->ifString()
+						->then(function (string $dir): string {
+							return $this->normalizePathIfPossible($dir);
+						})
 						->end()
 					->end()
 				->arrayNode(self::PARAMETER_METHOD_ANNOTATIONS_MAP)
